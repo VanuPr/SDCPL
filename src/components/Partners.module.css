@@ -97,19 +97,39 @@
 
 .partnerCard {
   background: white;
-  padding: 20px;
+  border: 1px solid #e9ecef;
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--border-color);
-  transition: transform 0.2s;
+  min-height: 100px;
+  transition: all 0.3s ease;
 }
 
 .partnerCard:hover {
   transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--primary-color);
+}
+
+.brandLogo {
+  max-width: 100%;
+  max-height: 60px;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(0.7);
+  transition: all 0.3s ease;
+}
+
+.partnerCard:hover .brandLogo {
+  filter: grayscale(0%) opacity(1);
+}
+
+.brandFallbackText {
+  font-weight: 700;
+  color: var(--text-secondary);
+  font-size: 16px;
+  text-align: center;
 }
 
 /* News Section */

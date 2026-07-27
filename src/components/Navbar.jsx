@@ -33,7 +33,7 @@ export default function Navbar() {
           <li><Link href="/services">Services</Link></li>
           <li><Link href="/#packages">Turnkey Packages</Link></li>
           <li><Link href="/#projects">Portfolio</Link></li>
-          <li><Link href="#contact">Contact</Link></li>
+          <li><Link href="/#contact">Contact</Link></li>
         </ul>
 
         <div className={styles.navActions}>
@@ -41,7 +41,7 @@ export default function Navbar() {
             <div className={styles.email}>✉ info@stavyadesignconstruction.com</div>
             <div className={styles.phone}>📞 +91 8825166415</div>
           </div>
-          <button className="btn-primary">Let's Build</button>
+          <Link href="/build" className="btn-primary">Let's Build</Link>
         </div>
       </div>
     </nav>

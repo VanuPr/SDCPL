@@ -46,6 +46,52 @@
   color: var(--primary-color);
 }
 
+.ctaGroup {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.primaryBtn {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 16px 40px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(243, 101, 49, 0.4);
+}
+
+.primaryBtn:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(243, 101, 49, 0.6);
+}
+
+.secondaryBtn {
+  display: inline-block;
+  background-color: transparent;
+  color: white;
+  padding: 14px 38px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  border: 2px solid white;
+  transition: all 0.3s ease;
+}
+
+.secondaryBtn:hover {
+  background-color: white;
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
 .withBox {
   display: inline-block;
   background: #1a1a1a;

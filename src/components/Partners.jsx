@@ -1,17 +1,18 @@
+"use client";
 import React from 'react';
 import styles from './Partners.module.css';
 
 export default function Partners() {
   const brands = [
-    { name: "ISI Steel" },
-    { name: "UltraTech Cement" },
-    { name: "Jaquar" },
-    { name: "Asian Paints" },
-    { name: "Kajaria" },
-    { name: "Hindware" },
-    { name: "Greenply" },
-    { name: "Havells" },
-    { name: "Saint Gobain" }
+    { name: "Tata Steel (ISI)", logo: "/partners/isi-steel.png" },
+    { name: "UltraTech Cement", logo: "/partners/ultratech.png" },
+    { name: "Jaquar", logo: "/partners/jaquar.svg" },
+    { name: "Asian Paints", logo: "/partners/asian-paints.png" },
+    { name: "Kajaria", logo: "/partners/kajaria.png" },
+    { name: "Hindware", logo: "/partners/hindware.png" },
+    { name: "Greenply", logo: "/partners/greenply.png" },
+    { name: "Havells", logo: "/partners/havells.webp" },
+    { name: "Saint Gobain", logo: "/partners/saint-gobain.webp" }
   ];
 
   return (
@@ -43,7 +44,11 @@ export default function Partners() {
           <div className={styles.partnerGrid}>
             {brands.map((brand, idx) => (
               <div key={idx} className={styles.partnerCard}>
-                <span className={styles.brandName}>{brand.name}</span>
+                <img 
+                  src={brand.logo} 
+                  alt={brand.name} 
+                  className={styles.brandLogo} 
+                />
               </div>
             ))}
           </div>

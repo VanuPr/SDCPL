@@ -1,5 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import styles from './Hero.module.css';
 import { useLocation } from '@/context/LocationContext';
 
@@ -24,9 +25,17 @@ export default function Hero() {
             <span className={styles.highlight}>Dream Home</span> <br/>
             <span className={styles.withBox}>with STAVYA</span>
           </h1>
-          <p className={styles.tagline} style={{color: '#fff', fontSize: '20px', marginBottom: '30px', fontWeight: '300'}}>
-            "Turning ideas into <span style={{fontWeight: '700'}}>concrete reality</span>"
+          <p className={styles.subtitle}>
+            Turning ideas into <strong>concrete reality</strong> with itemised BOQ and zero hidden costs.
           </p>
+          <div className={styles.ctaGroup}>
+            <Link href="/build" className={styles.primaryBtn}>
+              Let's Build! (Cost Calculator)
+            </Link>
+            <Link href="#packages" className={styles.secondaryBtn}>
+              Explore Packages
+            </Link>
+          </div>
           
           <div className={styles.statsRow}>
             <div className={styles.statItem}>
