@@ -1,0 +1,103 @@
+.header {
+  margin-bottom: 30px;
+}
+
+.title {
+  font-size: 24px;
+  color: var(--foreground);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: var(--muted-foreground);
+  font-size: 14px;
+}
+
+.tableContainer {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th {
+  background: var(--muted);
+  padding: 15px 20px;
+  color: var(--muted-foreground);
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+.table td {
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--card-foreground);
+  font-size: 14px;
+}
+
+.dateCell {
+  white-space: nowrap;
+}
+
+.time {
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+
+.fw600 {
+  font-weight: 600;
+}
+
+.email {
+  font-size: 13px;
+  color: var(--primary);
+  margin-top: 4px;
+}
+
+.requirements {
+  max-width: 400px;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+}
+
+.empty {
+  text-align: center;
+  padding: 40px !important;
+  color: var(--muted-foreground) !important;
+}
+
+/* Skeleton Loaders */
+.skeleton {
+  background: var(--muted);
+  background: linear-gradient(90deg, var(--muted) 25%, color-mix(in srgb, var(--muted) 80%, white) 50%, var(--muted) 75%);
+  background-size: 200% 100%;
+  animation: pulse 1.5s infinite linear;
+}
+
+@keyframes pulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeletonText {
+  height: 16px;
+  width: 120px;
+  border-radius: 4px;
+}
+
+.skeletonTextSmall {
+  height: 16px;
+  width: 80px;
+  border-radius: 4px;
+}

@@ -2,10 +2,14 @@
 import React from 'react';
 import styles from './Footer.module.css';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useLocation } from '@/context/LocationContext';
 
 export default function Footer() {
   const { city } = useLocation();
+  const pathname = usePathname();
+
+  if (pathname.startsWith('/admin')) return null;
 
   const mockAddresses = {
     Dhanbad: "Mock Office, Dhanbad, Jharkhand, India",

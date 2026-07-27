@@ -2,11 +2,14 @@
 
 import React from 'react';
 import styles from './CityModal.module.css';
+import { usePathname } from 'next/navigation';
 import { useLocation } from '@/context/LocationContext';
 
 export default function CityModal() {
   const { isModalOpen, setIsModalOpen, setCity, city: currentCity } = useLocation();
+  const pathname = usePathname();
 
+  if (pathname.startsWith('/admin')) return null;
   if (!isModalOpen) return null;
 
   const cities = [

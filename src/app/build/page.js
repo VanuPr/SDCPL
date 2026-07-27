@@ -1,5 +1,8 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import { db } from '../../lib/firebase';
+import { collection, addDoc } from 'firebase/firestore';
+import Link from 'next/link';
 import styles from './Build.module.css';
 import { materialsData } from './materialsData';
 
@@ -40,6 +43,24 @@ export default function BuildCalculator() {
   const [siteType, setSiteType] = useState('Independent House');
   const [packageRate, setPackageRate] = useState(1650); // Default standard
   const [selectedMaterials, setSelectedMaterials] = useState(new Set());
+  
+  // Lead Submission State
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [contactName, setContactName] = useState('');
+  const [contactPhone, setContactPhone] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submissionId, setSubmissionId] = useState('');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const pkg = params.get('package');
+      if (pkg === 'standard') setPackageRate(1650);
+      if (pkg === 'gold') setPackageRate(1950);
+      if (pkg === 'platinum') setPackageRate(2350);
+    }
+  }, []);
 
   const handleMaterialToggle = (item) => {
     const newSet = new Set(selectedMaterials);
@@ -68,6 +89,57 @@ export default function BuildCalculator() {
   const totalCost = area * totalRatePerSqft;
   
   const animatedCost = useCountUp(totalCost, 800);
+
+  const handleSubmitLead = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      const selectedMaterialNames = [];
+      materialsData.forEach(cat => {
+        cat.items.forEach(item => {
+          if (selectedMaterials.has(item.id)) selectedMaterialNames.push(item.name);
+        });
+      });
+
+      const docRef = await addDoc(collection(db, "build_calculator_leads"), {
+        name: contactName,
+        phone: contactPhone,
+        area: area,
+        siteType: siteType,
+        basePackageRate: packageRate,
+        addonRate: addonRate,
+        totalCost: totalCost,
+        selectedMaterials: selectedMaterialNames,
+        status: 'Initialized',
+        timestamp: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      });
+      setSubmissionId(docRef.id);
+      setSubmitSuccess(true);
+      setTimeout(() => {
+        setSubmitSuccess(false);
+        setIsModalOpen(false);
+        setContactName('');
+        setContactPhone('');
+        setSubmissionId('');
+      }, 10000); // Increased timeout so they have time to download
+    } catch (err) {
+      console.error("Error submitting lead:", err);
+      alert("Failed to submit. Please ensure Firebase is configured.");
+    }
+    setIsSubmitting(false);
+  };
+
+  const handleDownloadId = () => {
+    const text = `SDCPL Project Submission\n\nTracking ID: ${submissionId}\nDate: ${new Date().toLocaleString()}\nEstimated Cost: Rs. ${totalCost.toLocaleString('en-IN')}\n\nYou can use this Tracking ID to track your project status on our website at /track.`;
+    const blob = new Blob([text], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `SDCPL_Tracking_${submissionId}.txt`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
 
   const siteTypes = ["1 BHK", "2 BHK", "3 BHK", "4 BHK", "Villa", "Independent House", "Bungalow", "Commercial Building", "Hotel", "Office Space", "Apartment Complex"];
 
@@ -219,7 +291,7 @@ export default function BuildCalculator() {
               </div>
             </div>
             
-            <button className={styles.submitBtn}>
+            <button className={styles.submitBtn} onClick={() => setIsModalOpen(true)}>
               Submit for Detailed Quote
             </button>
             <p className={styles.disclaimer}>
@@ -228,6 +300,54 @@ export default function BuildCalculator() {
           </div>
         </div>
       </div>
+
+      {/* Submission Modal */}
+      {isModalOpen && (
+        <div className={styles.modalOverlay} onClick={() => !isSubmitting && !submitSuccess && setIsModalOpen(false)}>
+          <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
+            {submitSuccess ? (
+              <div className={styles.successMessage}>
+                <h3>Thank you, {contactName}!</h3>
+                <p>We've received your build requirements and will contact you shortly.</p>
+                <div className={styles.trackingBox}>
+                  <h4>Your Tracking ID</h4>
+                  <div className={styles.trackingId}>{submissionId}</div>
+                  <p>Please save this ID to track your project status.</p>
+                  <div className={styles.trackingActions}>
+                    <button type="button" onClick={handleDownloadId} className={styles.downloadBtn}>
+                      Download ID
+                    </button>
+                    <Link href="/track" className={styles.trackLinkBtn}>
+                      Track Now
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <>
+                <h3 className={styles.modalTitle}>Get Your Itemised BOQ</h3>
+                <p className={styles.modalSubtitle}>Provide your contact details and our engineers will get in touch with you.</p>
+                <form onSubmit={handleSubmitLead} className={styles.leadForm}>
+                  <div className={styles.formGroup}>
+                    <label>Full Name</label>
+                    <input type="text" required value={contactName} onChange={e => setContactName(e.target.value)} placeholder="John Doe" />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>Phone Number</label>
+                    <input type="tel" required value={contactPhone} onChange={e => setContactPhone(e.target.value)} placeholder="+91 00000 00000" />
+                  </div>
+                  <div className={styles.modalActions}>
+                    <button type="button" onClick={() => setIsModalOpen(false)} className={styles.cancelBtn}>Cancel</button>
+                    <button type="submit" disabled={isSubmitting} className={styles.confirmSubmitBtn}>
+                      {isSubmitting ? 'Sending...' : 'Send Requirements'}
+                    </button>
+                  </div>
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </main>
   );
 }

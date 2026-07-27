@@ -6,6 +6,48 @@
   margin: 0 auto;
 }
 
+.btn:hover {
+  background: #d6511a;
+}
+
+/* Custom Package Banner */
+.customBanner {
+  margin-top: 50px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+}
+
+.customBannerContent h3 {
+  font-size: 24px;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.customBannerContent p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.talkBtn {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.talkBtn:hover {
+  background: #d6511a;
+}
+
 .card {
   background: white;
   border-radius: var(--radius-lg);

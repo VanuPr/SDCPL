@@ -1,7 +1,12 @@
-import React from 'react';
+"use client";
+import React, { useState } from 'react';
+import Link from 'next/link';
 import styles from './Packages.module.css';
+import CustomContactModal from './CustomContactModal';
 
 export default function Packages() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const packages = [
     {
       name: "Standard Package",
@@ -70,9 +75,19 @@ export default function Packages() {
                 ))}
               </ul>
               
-              <button className={`btn-primary ${styles.btn}`}>Get Detailed Quote</button>
+              <Link href={`/build?package=${pkg.name.split(' ')[0].toLowerCase()}`} className={`btn-primary ${styles.btn}`} style={{ display: 'block', textAlign: 'center' }}>
+                Let's Build
+              </Link>
             </div>
           ))}
+        </div>
+
+        <div className={styles.customBanner}>
+          <div className={styles.customBannerContent}>
+            <h3>Need a custom package?</h3>
+            <p>We tailor materials, finishes and timelines to your exact brief and budget.</p>
+            <button className={styles.talkBtn} onClick={() => setIsModalOpen(true)}>Talk to our team</button>
+          </div>
         </div>
 
         <div style={{
@@ -92,6 +107,8 @@ export default function Packages() {
             This means there are <strong>no hidden costs</strong>, and billing is strictly done based on work milestones achieved.
           </p>
         </div>
+
+        <CustomContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </div>
     </section>
   );

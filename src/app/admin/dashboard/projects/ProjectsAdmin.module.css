@@ -1,0 +1,233 @@
+.header {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 24px;
+  color: var(--foreground);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: var(--muted-foreground);
+  font-size: 14px;
+}
+
+.addBtn {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border: none;
+  padding: 10px 20px;
+  border-radius: calc(var(--radius) - 2px);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.tableContainer {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th {
+  background: var(--muted);
+  padding: 15px 20px;
+  color: var(--muted-foreground);
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+.table td {
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+  color: var(--card-foreground);
+  font-size: 14px;
+}
+
+.projectImage {
+  width: 60px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.fw600 {
+  font-weight: 600;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+}
+
+.statusCompleted { background: color-mix(in srgb, #10b981 20%, transparent); color: #34d399; }
+.statusProgress { background: color-mix(in srgb, #3b82f6 20%, transparent); color: #60a5fa; }
+.statusUpcoming { background: color-mix(in srgb, #f59e0b 20%, transparent); color: #fbbf24; }
+
+.actionBtn {
+  background: none;
+  border: none;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.actionBtn:hover {
+  color: var(--primary);
+}
+
+.actionBtn.deleteBtn:hover {
+  color: var(--destructive);
+}
+
+/* Modal CSS */
+.modalOverlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: var(--card);
+  padding: 40px;
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
+  animation: slideUp 0.3s ease-out;
+  border: 1px solid var(--border);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modalTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--card-foreground);
+  margin-bottom: 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.formGroup label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--card-foreground);
+}
+
+.formGroup input, .formGroup select {
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 2px);
+  outline: none;
+  font-size: 14px;
+  background: var(--input);
+  color: var(--foreground);
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cancelBtn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  padding: 10px 16px;
+  border-radius: calc(var(--radius) - 2px);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.saveBtn {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border: none;
+  padding: 10px 20px;
+  border-radius: calc(var(--radius) - 2px);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.saveBtn:disabled {
+  opacity: 0.7;
+}
+
+/* Skeleton Loaders */
+.skeleton {
+  background: var(--muted);
+  background: linear-gradient(90deg, var(--muted) 25%, color-mix(in srgb, var(--muted) 80%, white) 50%, var(--muted) 75%);
+  background-size: 200% 100%;
+  animation: pulse 1.5s infinite linear;
+}
+
+@keyframes pulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeletonThumb {
+  width: 60px;
+  height: 40px;
+  border-radius: 4px;
+}
+
+.skeletonText {
+  height: 16px;
+  width: 100px;
+  border-radius: 4px;
+}
+
+.skeletonTextSmall {
+  height: 16px;
+  width: 60px;
+  border-radius: 4px;
+}
+
+.skeletonBadge {
+  height: 24px;
+  width: 80px;
+  border-radius: 20px;
+}

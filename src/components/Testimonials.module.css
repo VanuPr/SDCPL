@@ -128,9 +128,100 @@
 
 .quote {
   font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.5;
+  color: var(--muted-foreground);
+  line-height: 1.6;
   margin-bottom: 10px;
+}
+
+/* Review Form Styles */
+.addReviewBtn {
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.addReviewBtn:hover {
+  background: white;
+}
+.cancelReviewBtn {
+  background: transparent;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.reviewForm {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+.formHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.userPhoto {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.formHeader strong {
+  display: block;
+  font-size: 14px;
+  color: #0f172a;
+}
+.formHeader p {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0;
+}
+.ratingSelect {
+  margin-bottom: 12px;
+}
+.ratingSelect select {
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+}
+.reviewInput {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  resize: vertical;
+  font-family: inherit;
+  outline: none;
+}
+.reviewInput:focus {
+  border-color: var(--secondary);
+}
+.submitReviewBtn {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.submitReviewBtn:hover {
+  background: var(--primary-hover);
+}
+.submitReviewBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 .readMore {

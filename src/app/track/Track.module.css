@@ -1,0 +1,330 @@
+.pageBackground {
+  min-height: 100vh;
+  background-color: #020617; /* Slate 950 */
+  padding-bottom: 80px;
+}
+
+.header {
+  background-color: #0f172a; /* Slate 900 */
+  padding: 60px 0 40px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.pageTitle {
+  font-size: 36px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.subtitle {
+  color: #94a3b8;
+  font-size: 18px;
+}
+
+.contentContainer {
+  margin-top: 40px;
+  max-width: 900px;
+}
+
+.trackForm {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  padding: 40px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.inputField {
+  width: 100%;
+  padding: 16px 20px;
+  background: #020617;
+  border: 1px solid #334155;
+  color: white;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.inputField:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 16px;
+  background: white;
+  color: #0f172a;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.submitBtn:hover {
+  background: #f1f5f9;
+}
+
+.submitBtn:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.errorMsg {
+  color: #ef4444;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Dashboard Card UI */
+.dashboardCard {
+  background: #0b1121; /* Very dark blue matching screenshot */
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 40px;
+  color: white;
+  font-family: system-ui, -apple-system, sans-serif;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #1e293b;
+  padding-bottom: 24px;
+  margin-bottom: 32px;
+}
+
+.projectTitle {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.badges {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.badgePrimary, .badgeSecondary, .badgeWarning {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badgePrimary {
+  color: #fbbf24;
+  border: 1px solid #fbbf24;
+  background: rgba(251, 191, 36, 0.1);
+}
+
+.badgeSecondary {
+  color: #10b981;
+  border: 1px solid #10b981;
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.badgeWarning {
+  color: #fbbf24;
+  border: 1px solid #fbbf24;
+  background: rgba(251, 191, 36, 0.1);
+}
+
+.txnStatus {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-top: 10px;
+}
+
+.sectionTitle {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.sectionBlock {
+  margin-bottom: 40px;
+}
+
+.optionsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.optionBadge {
+  background: #1e293b;
+  color: #cbd5e1;
+  border: 1px solid #334155;
+  padding: 8px 16px;
+  border-radius: 24px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.emptyText {
+  color: #64748b;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.infoGrid {
+  display: flex;
+  gap: 40px;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 24px 32px;
+  margin-bottom: 40px;
+}
+
+.infoBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.infoLabel {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.infoValue {
+  color: #f8fafc;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Timeline */
+.timelineHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.statusHighlight {
+  color: #fbbf24;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.statusRejected {
+  color: #ef4444;
+}
+
+.timelineContainer {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+
+.timelineStage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.stageBar {
+  height: 8px;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.stageCompleted {
+  background: #10b981;
+}
+
+.stageActive {
+  background: #fbbf24;
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+}
+
+.stagePending {
+  background: #1e293b;
+}
+
+.stageRejected {
+  background: #ef4444;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+}
+
+.stageLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: #475569;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.labelActive {
+  color: #cbd5e1;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #1e293b;
+  padding-top: 24px;
+}
+
+.dateInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dateLabel {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.dateValue {
+  color: #cbd5e1;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.backBtn {
+  margin-top: 40px;
+  background: transparent;
+  color: #94a3b8;
+  border: 1px solid #334155;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.backBtn:hover {
+  background: #1e293b;
+  color: white;
+}

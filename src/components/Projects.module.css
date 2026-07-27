@@ -8,28 +8,47 @@
 .card {
   display: flex;
   flex-direction: column;
+  background: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.cardTitle {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 15px;
-  color: var(--text-primary);
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
 }
 
 .imageWrapper {
   width: 100%;
-  height: 380px;
-  border-radius: var(--radius-md);
+  height: 280px;
+  position: relative;
   overflow: hidden;
-  margin-bottom: 12px;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.imageWrapper:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
+.placeholderImage {
+  width: 100%;
+  height: 100%;
+  background: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-foreground);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.imageWrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+  pointer-events: none;
 }
 
 .cardImage {
@@ -43,10 +62,61 @@
   transform: scale(1.05);
 }
 
-.crn {
-  font-size: 14px;
+.tagsContainer {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+
+.tag {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.statusCompleted {
+  background: #10b981;
+  color: white;
+}
+
+.statusProgress {
+  background: var(--primary-color);
+  color: white;
+}
+
+.cardContent {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.location {
+  font-size: 15px;
   color: var(--text-secondary);
-  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+
+.locationIcon {
+  font-size: 16px;
 }
 
 .actions {
@@ -69,6 +139,32 @@
 .outlineBtn:hover {
   border-color: var(--primary-color);
   background: #fffafa;
+}
+
+/* Skeleton Loaders */
+.skeleton {
+  background: #e2e8f0;
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  animation: pulse 1.5s infinite linear;
+}
+
+@keyframes pulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeletonText {
+  height: 24px;
+  width: 70%;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.skeletonTextSmall {
+  height: 16px;
+  width: 40%;
+  border-radius: 4px;
 }
 
 @media (max-width: 992px) {
