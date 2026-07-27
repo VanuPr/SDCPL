@@ -1,0 +1,121 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalContent {
+  background: white;
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  position: relative;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  color: var(--text-light);
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.closeBtn:hover {
+  color: var(--text-primary);
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+}
+
+.cityGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.cityBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 10px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: white;
+  color: var(--text-primary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.cityIcon {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 15px;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  filter: grayscale(100%) contrast(1.2);
+}
+
+.cityName {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.cityBtn:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.cityBtn:hover .cityIcon {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.cityBtn.active {
+  border-color: var(--primary-color);
+  background: var(--bg-secondary);
+}
+
+.cityBtn.active .cityIcon {
+  opacity: 1;
+  filter: none;
+}
+
+.cityBtn.active .cityName {
+  color: var(--primary-color);
+}
+

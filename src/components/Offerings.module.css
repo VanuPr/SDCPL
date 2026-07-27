@@ -1,0 +1,110 @@
+.imageContainer {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 40px auto;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.mainImage {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  height: 500px;
+}
+
+.tooltipContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Let clicks pass through if needed, though they shouldn't matter here */
+}
+
+.tooltipWrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
+  position: relative;
+  z-index: 2;
+}
+
+.line {
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-left: 1px dashed white;
+  height: 60px;
+  margin-bottom: -10px; /* Overlap with dot/box slightly */
+}
+
+.tooltipBox {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  text-align: center;
+  backdrop-filter: blur(4px);
+  max-width: 200px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Specific Positions */
+.pos1 {
+  top: 35%;
+  left: 20%;
+}
+.pos1 .line { height: 40px; }
+
+.pos2 {
+  top: 55%;
+  left: 30%;
+}
+
+.pos3 {
+  top: 50%;
+  left: 60%;
+}
+
+/* Tabs */
+.tabsWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.tabs {
+  display: inline-flex;
+  background-color: #f1f1f1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.tabBtn {
+  padding: 12px 32px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.tabBtn.active {
+  background-color: #1a1a1a;
+  color: white;
+}
+
+.tabBtn:hover:not(.active) {
+  background-color: #e5e5e5;
+}

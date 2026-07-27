@@ -1,0 +1,133 @@
+.referralBanner {
+  display: flex;
+  background: white;
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 20px rgba(0,0,0,0.08);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  margin-bottom: 80px;
+}
+
+.bannerImage {
+  flex: 1;
+  background: #fdf6f3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+  position: relative;
+}
+
+.illustration {
+  position: relative;
+  font-size: 80px;
+}
+
+.circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  background: #fbc6b4;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.person {
+  position: relative;
+  z-index: 1;
+}
+
+.bannerContent {
+  flex: 1;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.bannerContent h3 {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+.amount {
+  color: #ef4444; /* red for amount */
+  font-weight: 700;
+}
+
+.learnMoreBtn {
+  border: 1px solid var(--border-color);
+  background: white;
+  color: var(--text-secondary);
+  padding: 8px 24px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.learnMoreBtn:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+/* Banking Partners */
+.partnersSection {
+  margin-bottom: 80px;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin-bottom: 30px;
+}
+
+.partnerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.partnerCard {
+  background: white;
+  padding: 20px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s;
+}
+
+.partnerCard:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+/* News Section */
+.newsSection {
+  margin-top: 40px;
+}
+
+@media (max-width: 992px) {
+  .referralBanner {
+    flex-direction: column;
+  }
+  .logoGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .logoGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

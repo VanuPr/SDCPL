@@ -1,0 +1,98 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+  padding: 15px 0;
+}
+
+.navbar.scrolled {
+  padding: 10px 0;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoGroup {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  text-decoration: none;
+  line-height: 1.1;
+}
+
+.locationDropdown {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.arrow {
+  font-size: 10px;
+}
+
+.navLinks {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.navLinks a, .navLinks li {
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: 500;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.navLinks a:hover, .navLinks li:hover {
+  color: var(--primary-color);
+}
+
+.moreDropdown {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.contactDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+.email {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.phone {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}

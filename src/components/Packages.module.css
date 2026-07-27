@@ -1,0 +1,124 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 40px 30px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  transition: transform 0.3s ease;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+}
+
+.popular {
+  border-color: var(--primary-color);
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(243, 101, 49, 0.15);
+}
+
+.popular:hover {
+  transform: scale(1.05) translateY(-10px);
+}
+
+.badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary-color);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.priceContainer {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--primary-color);
+}
+
+.unit {
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+.desc {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+  flex-grow: 1;
+}
+
+.features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.check {
+  color: #10b981;
+  font-weight: bold;
+}
+
+.btn {
+  width: 100%;
+}
+
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .popular {
+    transform: none;
+  }
+  .popular:hover {
+    transform: translateY(-10px);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

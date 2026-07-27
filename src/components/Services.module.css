@@ -1,0 +1,86 @@
+.dashboardBanner {
+  background: linear-gradient(135deg, var(--primary-color), #d94d1f);
+  border-radius: var(--radius-lg);
+  padding: 30px 40px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  box-shadow: var(--shadow-md);
+}
+
+.bannerContent h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+
+.bannerContent p {
+  margin: 0;
+  font-size: 16px;
+  opacity: 0.9;
+  max-width: 600px;
+}
+
+.bannerIcon {
+  font-size: 60px;
+  opacity: 0.8;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.card {
+  background: var(--bg-secondary);
+  padding: 30px;
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.card:hover {
+  background: white;
+  border-color: var(--border-color);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-5px);
+}
+
+.icon {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .dashboardBanner {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+}

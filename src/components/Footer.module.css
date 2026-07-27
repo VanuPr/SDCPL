@@ -1,0 +1,166 @@
+.footer {
+  background-color: #fafafa;
+  padding: 60px 0;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.footerContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b21a8; /* Purple color matching screenshot */
+  margin-bottom: 25px;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.heading::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-image: linear-gradient(to right, #ccc 50%, transparent 50%);
+  background-size: 4px 1px;
+  background-repeat: repeat-x;
+}
+
+.logoSection {
+  margin-top: 10px;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+}
+
+.stavya {
+  font-size: 24px;
+  font-weight: 400;
+  color: #333;
+  letter-spacing: 1px;
+}
+
+.tagline {
+  font-size: 10px;
+  color: #666;
+  letter-spacing: 0.5px;
+}
+
+.address {
+  font-size: 13px;
+  line-height: 1.4;
+  font-style: normal;
+  color: #555;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.links a {
+  font-size: 13px;
+  color: #555;
+  transition: color 0.2s;
+}
+
+.links a:hover {
+  color: var(--primary-color);
+}
+
+.testimonial {
+  position: relative;
+  padding: 10px 0;
+}
+
+.quoteMark {
+  font-size: 40px;
+  color: #ccc;
+  line-height: 1;
+  position: absolute;
+  top: -10px;
+  left: 0;
+}
+
+.quoteText {
+  font-size: 13px;
+  margin: 30px 0 10px 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+.author {
+  font-size: 13px;
+  font-style: italic;
+  color: #6b21a8; /* Purple author text */
+  text-align: right;
+  margin-right: 10px;
+}
+
+.quoteMarkBottom {
+  font-size: 40px;
+  color: #ccc;
+  line-height: 1;
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+}
+
+.contactInfo {
+  font-size: 13px;
+  color: #555;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.socials {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  background-color: #0ea5e9; /* Sky blue */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.icon:nth-child(3) { background-color: #2563eb; } /* Facebook blue */
+.icon:nth-child(4) { background-color: #0284c7; } /* LinkedIn blue */
+.icon:nth-child(5) { background-color: #3b82f6; } /* Instagram-ish blue */
+
+@media (max-width: 992px) {
+  .footerContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .footerContainer {
+    grid-template-columns: 1fr;
+  }
+}
