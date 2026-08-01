@@ -1,5 +1,5 @@
 .dashboardBanner {
-  background: linear-gradient(135deg, var(--primary-color), #d94d1f);
+  background: var(--primary-color);
   border-radius: var(--radius-lg);
   padding: 30px 40px;
   color: white;

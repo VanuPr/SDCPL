@@ -1,7 +1,8 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { db } from '../../lib/firebase';
+import { db, auth } from '../../lib/firebase';
 import { collection, addDoc } from 'firebase/firestore';
+import { signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
 import styles from './Build.module.css';
 import { materialsData } from './materialsData';
@@ -51,6 +52,7 @@ export default function BuildCalculator() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submissionId, setSubmissionId] = useState('');
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -60,7 +62,17 @@ export default function BuildCalculator() {
       if (pkg === 'gold') setPackageRate(1950);
       if (pkg === 'platinum') setPackageRate(2350);
     }
+
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      if (currentUser && currentUser.displayName) {
+        setContactName(prev => prev || currentUser.displayName);
+      }
+    });
+    return () => unsubscribe();
   }, []);
+
+  const isGoogleUser = user && user.displayName && user.photoURL;
 
   const handleMaterialToggle = (item) => {
     const newSet = new Set(selectedMaterials);
@@ -90,8 +102,23 @@ export default function BuildCalculator() {
   
   const animatedCost = useCountUp(totalCost, 800);
 
-  const handleSubmitLead = async (e) => {
+  const handleAuthAndSubmit = async (e) => {
     e.preventDefault();
+    if (!contactName.trim() || !contactPhone.trim()) {
+      alert("Please fill all details.");
+      return;
+    }
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      await submitWithUser(result.user);
+    } catch (error) {
+      console.error("Google Sign-In Error:", error);
+      alert("Failed to sign in.");
+    }
+  };
+
+  const submitWithUser = async (currentUser) => {
     setIsSubmitting(true);
     try {
       const selectedMaterialNames = [];
@@ -104,6 +131,8 @@ export default function BuildCalculator() {
       const docRef = await addDoc(collection(db, "build_calculator_leads"), {
         name: contactName,
         phone: contactPhone,
+        email: currentUser.email,
+        googleUserId: currentUser.uid,
         area: area,
         siteType: siteType,
         basePackageRate: packageRate,
@@ -119,15 +148,24 @@ export default function BuildCalculator() {
       setTimeout(() => {
         setSubmitSuccess(false);
         setIsModalOpen(false);
-        setContactName('');
+        setContactName(currentUser.displayName || '');
         setContactPhone('');
         setSubmissionId('');
-      }, 10000); // Increased timeout so they have time to download
+      }, 10000); 
     } catch (err) {
       console.error("Error submitting lead:", err);
-      alert("Failed to submit. Please ensure Firebase is configured.");
+      alert("Failed to submit.");
     }
     setIsSubmitting(false);
+  };
+
+  const handleSubmitLead = async (e) => {
+    e.preventDefault();
+    if (!isGoogleUser) {
+      await handleAuthAndSubmit(e);
+      return;
+    }
+    await submitWithUser(user);
   };
 
   const handleDownloadId = () => {
@@ -338,9 +376,15 @@ export default function BuildCalculator() {
                   </div>
                   <div className={styles.modalActions}>
                     <button type="button" onClick={() => setIsModalOpen(false)} className={styles.cancelBtn}>Cancel</button>
-                    <button type="submit" disabled={isSubmitting} className={styles.confirmSubmitBtn}>
-                      {isSubmitting ? 'Sending...' : 'Send Requirements'}
-                    </button>
+                    {isGoogleUser ? (
+                      <button type="submit" disabled={isSubmitting} className={styles.confirmSubmitBtn}>
+                        {isSubmitting ? 'Sending...' : 'Send Requirements'}
+                      </button>
+                    ) : (
+                      <button type="button" onClick={handleAuthAndSubmit} disabled={isSubmitting} className={styles.confirmSubmitBtn}>
+                        Sign in with Google to Submit
+                      </button>
+                    )}
                   </div>
                 </form>
               </>

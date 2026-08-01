@@ -15,6 +15,15 @@ export default function Partners() {
     { name: "Saint Gobain", logo: "/partners/saint-gobain.webp" }
   ];
 
+  const bankBrands = [
+    { name: "SBI", logo: "/partners/SBI-Logo.png" },
+    { name: "Punjab National Bank", logo: "/partners/pnb.svg" },
+    { name: "ICICI Bank", logo: "/partners/icici.png" },
+    { name: "Axis Bank", logo: "/partners/Axis_Bank_logo.svg.webp" },
+    { name: "HDFC Bank", logo: "/partners/HDFC_Bank_Logo.svg.webp" },
+    { name: "LIC Housing", logo: "/partners/LIC_Housing_Finance_logo.png" }
+  ];
+
   return (
     <section className="section bg-white">
       <div className="container">
@@ -48,6 +57,31 @@ export default function Partners() {
                   src={brand.logo} 
                   alt={brand.name} 
                   className={styles.brandLogo} 
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Banking Partners */}
+        <div className={styles.partnersSection} style={{ marginTop: '60px' }}>
+          <h2 className="section-title text-center">Banking & Finance Partners</h2>
+          <p className="text-center" style={{ color: 'var(--text-secondary)', marginBottom: '40px' }}>
+            We have tied up with leading financial institutions to ensure smooth home loan approvals.
+          </p>
+          
+          <div className={styles.partnerGrid}>
+            {bankBrands.map((brand, idx) => (
+              <div key={idx} className={styles.partnerCard}>
+                <img 
+                  src={brand.logo} 
+                  alt={brand.name} 
+                  className={styles.brandLogo} 
+                  style={{ objectFit: 'contain' }}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "https://via.placeholder.com/150x60?text=" + brand.name;
+                  }}
                 />
               </div>
             ))}

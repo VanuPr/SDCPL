@@ -10,7 +10,7 @@
 
 .bannerImage {
   flex: 1;
-  background: #fdf6f3;
+  background: #f1f1f1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,7 +30,7 @@
   transform: translate(-50%, -50%);
   width: 150px;
   height: 150px;
-  background: #fbc6b4;
+  background: var(--primary-color);
   border-radius: 50%;
   z-index: 0;
 }
@@ -58,7 +58,7 @@
 }
 
 .amount {
-  color: #ef4444; /* red for amount */
+  color: var(--primary-color); /* orange for amount */
   font-weight: 700;
 }
 
@@ -97,7 +97,7 @@
 
 .partnerCard {
   background: white;
-  border: 1px solid #e9ecef;
+  border: 1px solid #ccc;
   border-radius: var(--radius-md);
   padding: 20px;
   display: flex;

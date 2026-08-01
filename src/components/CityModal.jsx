@@ -16,7 +16,7 @@ export default function CityModal() {
     { name: 'Dhanbad', icon: '/dhanbad_icon.png' },
     { name: 'Deoghar', icon: '/deoghar_icon.png' },
     { name: 'Ranchi', icon: '/ranchi_icon.png' },
-    { name: 'Bhagalpur', icon: '/bhagalpur_icon.png' }
+    { name: 'Dumka', icon: '/dumka_icon.png' }
   ];
 
   return (

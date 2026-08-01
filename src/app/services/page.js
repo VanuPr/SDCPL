@@ -2,8 +2,9 @@ import React from 'react';
 import styles from './ServicesPage.module.css';
 
 export const metadata = {
-  title: "Our Services | Stavya Design and Construction",
-  description: "Explore our comprehensive range of services including House Planning, Architectural Design, Turnkey Construction, Interior Design, and more."
+  title: "Premium Construction Services | Top Architects & Builders in Deoghar",
+  description: "Explore our comprehensive range of services including House Planning, Architectural Design, Turnkey Construction, and Interior Design in Deoghar and Dumka.",
+  keywords: "House Planning Deoghar, Architectural Design Jharkhand, Turnkey Construction Dumka, Interior Design Ranchi, Commercial Construction Santhal Pargana, Renovation Contractors"
 };
 
 export default function ServicesPage() {

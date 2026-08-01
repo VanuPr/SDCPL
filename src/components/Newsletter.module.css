@@ -4,7 +4,7 @@
 }
 
 .newsletterCard {
-  background: var(--primary);
+  background: var(--primary-color);
   border-radius: 24px;
   padding: 60px;
   display: flex;
@@ -26,7 +26,7 @@
   font-size: 36px;
   font-weight: 800;
   margin-bottom: 16px;
-  color: var(--primary-foreground);
+  color: white !important;
 }
 
 .subtitle {
@@ -76,8 +76,8 @@
   padding: 18px;
   border-radius: 12px;
   border: none;
-  background: var(--secondary);
-  color: var(--secondary-foreground);
+  background: #000;
+  color: white;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
@@ -98,10 +98,10 @@
 
 .successMessage {
   padding: 40px;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid #10b981;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid white;
   border-radius: 16px;
-  color: #10b981;
+  color: white;
 }
 
 .successMessage h3 {

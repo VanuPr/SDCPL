@@ -1,0 +1,20 @@
+export const locationsData = [
+  { name: "Deoghar", slug: "deoghar", keyword: "Top construction company in Deoghar" },
+  { name: "Dumka", slug: "dumka", keyword: "Best interior designer in Dumka" },
+  { name: "Ranchi", slug: "ranchi", keyword: "Top civil contractor in Ranchi" },
+  { name: "Dhanbad", slug: "dhanbad", keyword: "Turnkey house construction in Dhanbad" },
+  { name: "Jasidih", slug: "jasidih", keyword: "Architects and builders in Jasidih" },
+  { name: "Madhupur", slug: "madhupur", keyword: "Best construction company in Madhupur" },
+  { name: "Sarath", slug: "sarath", keyword: "Top interior designer in Sarath" },
+  { name: "Karon", slug: "karon", keyword: "House construction contractor in Karon" },
+  { name: "Mohanpur", slug: "mohanpur", keyword: "Best civil engineers in Mohanpur" },
+  { name: "Sarwan", slug: "sarwan", keyword: "Home renovation services in Sarwan" },
+  { name: "Devipur", slug: "devipur", keyword: "Top construction company in Devipur" },
+  { name: "Margomunda", slug: "margomunda", keyword: "Best interior designer in Margomunda" },
+  { name: "Palojori", slug: "palojori", keyword: "Turnkey house construction in Palojori" },
+  { name: "Sonaraithari", slug: "sonaraithari", keyword: "Architects and builders in Sonaraithari" },
+  { name: "Basukinath", slug: "basukinath", keyword: "Best interior designer in Basukinath" },
+  { name: "Jarmundi", slug: "jarmundi", keyword: "Top construction company in Jarmundi" },
+  { name: "Jama", slug: "jama", keyword: "House construction contractor in Jama" },
+  { name: "Katoria", slug: "katoria", keyword: "Top civil contractor in Katoria" }
+];

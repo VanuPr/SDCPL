@@ -4,6 +4,7 @@ import styles from './Footer.module.css';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLocation } from '@/context/LocationContext';
+import { locationsData } from '@/lib/locationsData';
 
 export default function Footer() {
   const { city } = useLocation();
@@ -46,9 +47,9 @@ export default function Footer() {
             <li><Link href="/about">Company Profile</Link></li>
             <li><Link href="/services">Services</Link></li>
             <li><Link href="/#packages">Turnkey Packages</Link></li>
-            <li><Link href="/#features">Key Features</Link></li>
+            <li><Link href="/features">Key Features</Link></li>
             <li><Link href="/#partners">Material Partners</Link></li>
-            <li><Link href="/#service-areas">Service Areas</Link></li>
+            <li><Link href="/about#service-areas">Service Areas</Link></li>
             <li><Link href="/#projects">Portfolio Highlights</Link></li>
           </ul>
         </div>
@@ -56,9 +57,13 @@ export default function Footer() {
         {/* Column 3: Service Areas */}
         <div className={styles.column}>
           <h4 className={styles.heading}>SERVICE AREAS</h4>
-          <p className={styles.address} style={{lineHeight: '1.8'}}>
-            Deoghar, Dumka, Jasidih, Madhupur, Sarath, Karon, Mohanpur, Sarwan, Devipur, Margomunda, Palojori, Sonaraithari.
-          </p>
+          <div className={styles.seoLinksGrid}>
+            {locationsData.map((loc) => (
+              <Link key={loc.slug} href={`/locations/${loc.slug}`} className={styles.seoLink}>
+                {loc.keyword}
+              </Link>
+            ))}
+          </div>
           
           <h4 className={styles.heading} style={{marginTop: '30px'}}>TESTIMONIALS</h4>
           <div className={styles.testimonial}>

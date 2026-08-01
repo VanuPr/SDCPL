@@ -83,7 +83,7 @@
 }
 
 .statusCompleted {
-  background: #10b981;
+  background: var(--primary-color);
   color: white;
 }
 
@@ -143,8 +143,8 @@
 
 /* Skeleton Loaders */
 .skeleton {
-  background: #e2e8f0;
-  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background: #e5e5e5;
+  background: linear-gradient(90deg, #e5e5e5 25%, #f5f5f5 50%, #e5e5e5 75%);
   background-size: 200% 100%;
   animation: pulse 1.5s infinite linear;
 }

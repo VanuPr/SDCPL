@@ -4,7 +4,16 @@ import { Landmark, Mountain, TrainFront, Trees, Waves, Castle, Tractor, Home, Fa
 
 export const metadata = {
   title: "About Stavya Design and Construction | Top Construction Company in Deoghar, Jharkhand",
-  description: "Stavya Design and Construction is a government-approved civil engineering firm in Deoghar. We specialize in turnkey construction, architectural design, and interiors across Jharkhand."
+  description: "Stavya Design and Construction is a government-approved civil engineering firm in Deoghar. We specialize in turnkey construction, architectural design, and interiors across Jharkhand.",
+  keywords: [
+    "About Stavya Design and Construction",
+    "Best Construction Company in Deoghar",
+    "Top Builders in Jharkhand",
+    "Civil Engineers in Santhal Pargana",
+    "Turnkey Home Builders",
+    "House Construction Deoghar",
+    "Government Approved Contractors"
+  ].join(', '),
 };
 
 export default function AboutPage() {
@@ -61,6 +70,11 @@ export default function AboutPage() {
       <section className="section bg-secondary">
         <div className={`container ${styles.overviewGrid}`}>
           <div className={styles.contentBlock}>
+            <img 
+              src="/about-engineers.png" 
+              alt="Engineers at Stavya Design and Construction" 
+              style={{ width: '100%', height: '300px', objectFit: 'cover', borderRadius: '12px', marginBottom: '30px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }} 
+            />
             <h2 className="section-title">Who We Are</h2>
             <p className={styles.text}>
               Stavya Design and Construction is a Government-approved civil engineering firm headquartered in Deoghar, Jharkhand. We believe that homes are built with dreams, not just brick and stone. With an expert team of 20+ qualified architects, civil engineers, and interior designers, we execute residential and commercial projects across the Santhal Pargana region. Our biggest promise: <strong>"To complete every project on time, with absolute transparency and impeccable craftsmanship."</strong>
@@ -73,6 +87,11 @@ export default function AboutPage() {
           </div>
           
           <div className={styles.valuesCard}>
+            <img 
+              src="/about-hero.png" 
+              alt="Premium Home Construction by Stavya" 
+              style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', marginBottom: '20px' }} 
+            />
             <h3 className={styles.valuesTitle}>Our Mission</h3>
             <p className={styles.textSmall}>To provide every Indian family with a home that encompasses premium architectural design, robust engineering, and absolute price transparency.</p>
             
@@ -140,7 +159,7 @@ export default function AboutPage() {
       </section>
 
       {/* Service Areas */}
-      <section className="section">
+      <section id="service-areas" className="section">
         <div className="container">
           <h2 className="section-title text-center">Our Service Areas</h2>
           <p className="text-center" style={{maxWidth: '800px', margin: '0 auto 50px auto', fontSize: '18px', color: 'var(--text-secondary)', lineHeight: '1.8'}}>

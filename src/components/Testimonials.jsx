@@ -6,39 +6,6 @@ import { collection, getDocs, addDoc } from 'firebase/firestore';
 import { signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth';
 
 export default function Testimonials() {
-  const testimonials = [
-    {
-      id: 1,
-      name: "Neelam & Ratan Okhandiar",
-      year: "2024",
-      crn: "CRN211861",
-      image: "/testimonial1.png",
-      quote: `"After a lifetime of service, we needed someone we could rely on-and we found it with STAVYA."`,
-      rating: 4.5,
-      isVideo: true
-    },
-    {
-      id: 2,
-      name: "Rajasri Suresh",
-      year: "2025",
-      crn: "CRN299808",
-      image: "/testimonial2.png",
-      quote: `"Ajay and Rajasri's Dream Home"`,
-      rating: 5,
-      isVideo: true
-    },
-    {
-      id: 3,
-      name: "Gajanan K Hegde",
-      year: "2024",
-      crn: "CRN162781",
-      image: "/testimonial3.png",
-      quote: `"We looked at so many apartments, but nothing felt like home."`,
-      rating: 5,
-      isVideo: true
-    }
-  ];
-
   const [dbReviews, setDbReviews] = useState([]);
   const [user, setUser] = useState(null);
   const [isWriting, setIsWriting] = useState(false);
@@ -100,7 +67,9 @@ export default function Testimonials() {
         image: currentUser.photoURL,
         quote: `"${reviewText.trim()}"`,
         rating: rating,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        uid: currentUser.uid,
+        email: currentUser.email
       };
       const docRef = await addDoc(collection(db, "reviews"), newReview);
       setDbReviews([{ id: docRef.id, ...newReview }, ...dbReviews]);
@@ -126,8 +95,8 @@ export default function Testimonials() {
     await submitGivenUser(user);
   };
 
-  const allReviews = [...dbReviews, ...testimonials];
   const isGoogleUser = user && user.displayName && user.photoURL;
+  const hasReviewed = user && dbReviews.some(r => r.uid === user.uid);
 
   const filters = [
     "✓ All", "Basic Package", "Premium Package", "> 1000 sqft", "3+ BHK", "> 1 floor", "> ₹ 50 lakhs"
@@ -144,7 +113,9 @@ export default function Testimonials() {
             </p>
           </div>
           <div>
-            {!isWriting ? (
+            {hasReviewed ? (
+              <p style={{ color: 'var(--primary-color)', fontWeight: 'bold' }}>You have already submitted a review.</p>
+            ) : !isWriting ? (
               <button onClick={() => setIsWriting(true)} className={styles.addReviewBtn}>
                 Write a Review
               </button>
@@ -218,7 +189,7 @@ export default function Testimonials() {
         </div>
 
         <div className={styles.grid}>
-          {allReviews.map(item => (
+          {dbReviews.map(item => (
             <div key={item.id} className={styles.card}>
               <div className={styles.videoWrapper}>
                 <img src={item.image} alt={item.name} className={styles.thumbnail} style={!item.isVideo ? { objectFit: 'contain', background: '#f8fafc' } : {}} />

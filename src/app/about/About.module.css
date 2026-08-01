@@ -107,6 +107,7 @@
   font-weight: 800;
   margin: 0 0 10px 0;
   line-height: 1;
+  color: white !important;
 }
 
 .statText {

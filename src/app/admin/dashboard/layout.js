@@ -46,6 +46,11 @@ export default function AdminDashboardLayout({ children }) {
     { name: 'Projects', path: '/admin/dashboard/projects' },
     { name: 'Custom Leads', path: '/admin/dashboard/leads' },
     { name: 'Calculator Submissions', path: '/admin/dashboard/calculator' },
+    { name: 'Contacts', path: '/admin/dashboard/contacts' },
+    { name: 'Franchise Apps', path: '/admin/dashboard/franchise' },
+    { name: 'Designer Apps', path: '/admin/dashboard/designers' },
+    { name: 'Reviews', path: '/admin/dashboard/reviews' },
+    { name: 'Cost Constants', path: '/admin/dashboard/cost-constants' },
   ];
 
   return (

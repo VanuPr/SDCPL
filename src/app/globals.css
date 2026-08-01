@@ -89,6 +89,11 @@ button {
   font-family: inherit;
 }
 
+/* Force all headings to primary color (Orange) */
+h1, h2, h3, h4, h5, h6, .section-title {
+  color: var(--primary-color) !important;
+}
+
 /* Global utility classes for vanilla CSS */
 .container {
   width: 100%;
