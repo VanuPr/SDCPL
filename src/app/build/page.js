@@ -42,6 +42,7 @@ function useCountUp(end, duration = 1000) {
 export default function BuildCalculator() {
   const [area, setArea] = useState(1000);
   const [siteType, setSiteType] = useState('Independent House');
+  const [city, setCity] = useState('Ranchi');
   const [packageRate, setPackageRate] = useState(1650); // Default standard
   const [selectedMaterials, setSelectedMaterials] = useState(new Set());
   
@@ -49,6 +50,9 @@ export default function BuildCalculator() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [contactName, setContactName] = useState('');
   const [contactPhone, setContactPhone] = useState('');
+  const [locationText, setLocationText] = useState('');
+  const [mapLink, setMapLink] = useState('');
+  const [isLocating, setIsLocating] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submissionId, setSubmissionId] = useState('');
@@ -135,10 +139,13 @@ export default function BuildCalculator() {
         googleUserId: currentUser.uid,
         area: area,
         siteType: siteType,
+        city: city,
         basePackageRate: packageRate,
         addonRate: addonRate,
         totalCost: totalCost,
         selectedMaterials: selectedMaterialNames,
+        locationText: locationText,
+        mapLink: mapLink,
         status: 'Initialized',
         timestamp: new Date().toISOString(),
         updatedAt: new Date().toISOString()
@@ -150,8 +157,10 @@ export default function BuildCalculator() {
         setIsModalOpen(false);
         setContactName(currentUser.displayName || '');
         setContactPhone('');
+        setLocationText('');
+        setMapLink('');
         setSubmissionId('');
-      }, 10000); 
+      }, 10000);
     } catch (err) {
       console.error("Error submitting lead:", err);
       alert("Failed to submit.");
@@ -179,7 +188,31 @@ export default function BuildCalculator() {
     URL.revokeObjectURL(url);
   };
 
+  const handleAutoDetectLocation = () => {
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by your browser.");
+      return;
+    }
+    setIsLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        setMapLink(`https://www.google.com/maps?q=${lat},${lng}`);
+        if (!locationText) {
+          setLocationText("Location detected via GPS");
+        }
+        setIsLocating(false);
+      },
+      (error) => {
+        alert("Unable to retrieve location: " + error.message);
+        setIsLocating(false);
+      }
+    );
+  };
+
   const siteTypes = ["1 BHK", "2 BHK", "3 BHK", "4 BHK", "Villa", "Independent House", "Bungalow", "Commercial Building", "Hotel", "Office Space", "Apartment Complex"];
+  const popularCities = ["Ranchi", "Jamshedpur", "Dhanbad", "Bokaro", "Patna", "Kolkata", "Other"];
 
   return (
     <main className={styles.pageBackground}>
@@ -221,6 +254,19 @@ export default function BuildCalculator() {
               >
                 {siteTypes.map(type => (
                   <option key={type} value={type}>{type}</option>
+                ))}
+              </select>
+            </div>
+            
+            <div className={styles.inputGroup}>
+              <label>City</label>
+              <select 
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                className={styles.inputField}
+              >
+                {popularCities.map(c => (
+                  <option key={c} value={c}>{c}</option>
                 ))}
               </select>
             </div>
@@ -373,6 +419,39 @@ export default function BuildCalculator() {
                   <div className={styles.formGroup}>
                     <label>Phone Number</label>
                     <input type="tel" required value={contactPhone} onChange={e => setContactPhone(e.target.value)} placeholder="+91 00000 00000" />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>Site Location / Address</label>
+                    <div style={{ display: 'flex', gap: '10px' }}>
+                      <input 
+                        type="text" 
+                        required 
+                        value={locationText} 
+                        onChange={e => setLocationText(e.target.value)} 
+                        placeholder="Plot No., Street, Landmark" 
+                        style={{ flex: 1 }}
+                      />
+                      <button 
+                        type="button" 
+                        onClick={handleAutoDetectLocation}
+                        disabled={isLocating}
+                        style={{
+                          padding: '0 15px',
+                          backgroundColor: mapLink ? '#10b981' : '#4f46e5',
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '8px',
+                          cursor: 'pointer',
+                          fontWeight: '500',
+                          fontSize: '14px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '5px'
+                        }}
+                      >
+                        {isLocating ? 'Detecting...' : mapLink ? '✓ Detected' : 'Auto Detect GPS'}
+                      </button>
+                    </div>
                   </div>
                   <div className={styles.modalActions}>
                     <button type="button" onClick={() => setIsModalOpen(false)} className={styles.cancelBtn}>Cancel</button>

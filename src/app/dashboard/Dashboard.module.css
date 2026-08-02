@@ -1,0 +1,199 @@
+.pageBackground {
+  background-color: #f8fafc;
+  min-height: 100vh;
+  padding-top: 80px;
+}
+
+.header {
+  background: var(--primary);
+  color: white;
+  padding: 60px 0;
+  margin-bottom: 40px;
+}
+
+.pageTitle {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.subtitle {
+  font-size: 18px;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contentContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
+
+.signInContainer {
+  background: white;
+  padding: 60px 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
+}
+
+.signInContainer h2 {
+  font-size: 24px;
+  color: #0f172a;
+  margin-bottom: 16px;
+}
+
+.signInContainer p {
+  color: #475569;
+  margin-bottom: 32px;
+}
+
+.googleBtn {
+  padding: 14px 28px;
+  background-color: #4285F4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.googleBtn:hover {
+  background-color: #3367d6;
+  transform: translateY(-2px);
+}
+
+.ticketGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.ticketCard {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ticketCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.ticketHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 16px;
+}
+
+.ticketId {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  font-family: monospace;
+  background: #f1f5f9;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.statusBadge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statusPending { background: #fef3c7; color: #b45309; }
+.statusUnderAudit { background: #e0e7ff; color: #4338ca; }
+.statusInProgress { background: #dbeafe; color: #1d4ed8; }
+.statusCompleted { background: #dcfce7; color: #15803d; }
+.statusRejected { background: #fee2e2; color: #b91c1c; }
+.statusCustom { background: #f3f4f6; color: #4b5563; }
+
+.ticketBody {
+  margin-bottom: 16px;
+}
+
+.ticketLabel {
+  font-size: 12px;
+  color: #64748b;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.ticketMessage {
+  font-size: 14px;
+  color: #334155;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ticketFooter {
+  font-size: 13px;
+  color: #94a3b8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.emptyState {
+  background: white;
+  padding: 60px 40px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px dashed #cbd5e1;
+}
+
+.emptyState h3 {
+  font-size: 20px;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.emptyState p {
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+.linkBtn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.linkBtn:hover {
+  background-color: var(--primary-hover);
+}
+
+.loading {
+  text-align: center;
+  padding: 60px 0;
+  color: #64748b;
+  font-size: 18px;
+}

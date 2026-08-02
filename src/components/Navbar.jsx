@@ -62,6 +62,7 @@ export default function Navbar() {
           <li><Link href="/#packages">Turnkey Packages</Link></li>
           <li><Link href="/#projects">Portfolio</Link></li>
           <li><Link href="/contact">Contact</Link></li>
+          {user && <li><Link href="/dashboard" style={{ color: 'var(--primary-color)', fontWeight: 'bold' }}>Dashboard</Link></li>}
         </ul>
 
         <div className={styles.navActions}>

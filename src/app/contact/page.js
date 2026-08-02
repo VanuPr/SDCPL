@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from 'react';
 import styles from './Contact.module.css';
-import { db } from '../../lib/firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import { db, auth } from '../../lib/firebase';
+import { doc, setDoc, updateDoc } from 'firebase/firestore';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -12,11 +13,21 @@ export default function Contact() {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [successCode, setSuccessCode] = useState(null);
+  const [isLinking, setIsLinking] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const generateCode = () => {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let code = '';
+    for (let i = 0; i < 7; i++) {
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return code;
   };
 
   const handleSubmit = async (e) => {
@@ -24,19 +35,42 @@ export default function Contact() {
     setIsSubmitting(true);
     
     try {
-      await addDoc(collection(db, "contact_submissions"), {
+      const code = generateCode();
+      await setDoc(doc(db, "contact_submissions", code), {
         ...formData,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        status: "Pending"
       });
-      setSuccess(true);
+      setSuccessCode(code);
       setFormData({ name: '', phone: '', email: '', message: '' });
-      setTimeout(() => setSuccess(false), 5000);
     } catch (error) {
       console.error("Error submitting contact form:", error);
       alert("Failed to send message. Please try again.");
     }
     
     setIsSubmitting(false);
+  };
+
+  const handleGoogleSignIn = async () => {
+    setIsLinking(true);
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      
+      // Update the ticket to link it to the user
+      if (successCode) {
+        await updateDoc(doc(db, "contact_submissions", successCode), {
+          userId: user.uid
+        });
+        alert('Support code saved to your account!');
+        window.location.href = '/dashboard';
+      }
+    } catch (error) {
+      console.error('Error signing in:', error);
+      alert('Failed to save code. Please try again.');
+    }
+    setIsLinking(false);
   };
 
   return (
@@ -83,68 +117,84 @@ export default function Contact() {
         <div className={styles.formCard}>
           <h3>Send us a Message</h3>
           
-          {success && (
-            <div className={styles.successMessage}>
-              Thank you! Your message has been sent successfully. We will get back to you soon.
+          {successCode ? (
+            <div className={styles.successContainer}>
+              <div className={styles.successMessage}>
+                <strong>Thank you!</strong> Your support ticket has been created.
+              </div>
+              <div className={styles.ticketCard}>
+                <span className={styles.ticketLabel}>Your Support Code</span>
+                <span className={styles.ticketCode}>{successCode}</span>
+              </div>
+              <p className={styles.ticketInfo}>
+                Please save this code to track your issue status. For a seamless experience, sign in with Google to automatically save it to your Client Dashboard.
+              </p>
+              <button 
+                onClick={handleGoogleSignIn} 
+                disabled={isLinking}
+                className={styles.googleBtn}
+              >
+                {isLinking ? 'Linking...' : 'Save Code with Google'}
+              </button>
             </div>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <div className={styles.formGroup}>
+                <label>Full Name</label>
+                <input 
+                  type="text" 
+                  name="name" 
+                  required 
+                  value={formData.name} 
+                  onChange={handleChange} 
+                  className={styles.inputField} 
+                  placeholder="John Doe" 
+                />
+              </div>
+              
+              <div className={styles.formGroup}>
+                <label>Phone Number</label>
+                <input 
+                  type="tel" 
+                  name="phone" 
+                  required 
+                  value={formData.phone} 
+                  onChange={handleChange} 
+                  className={styles.inputField} 
+                  placeholder="+91 00000 00000" 
+                />
+              </div>
+              
+              <div className={styles.formGroup}>
+                <label>Email Address</label>
+                <input 
+                  type="email" 
+                  name="email" 
+                  required 
+                  value={formData.email} 
+                  onChange={handleChange} 
+                  className={styles.inputField} 
+                  placeholder="john@example.com" 
+                />
+              </div>
+              
+              <div className={styles.formGroup}>
+                <label>Your Message</label>
+                <textarea 
+                  name="message" 
+                  required 
+                  value={formData.message} 
+                  onChange={handleChange} 
+                  className={styles.inputField} 
+                  placeholder="How can we help you?" 
+                />
+              </div>
+              
+              <button type="submit" disabled={isSubmitting} className={styles.submitBtn}>
+                {isSubmitting ? 'Sending...' : 'Send Message'}
+              </button>
+            </form>
           )}
-
-          <form onSubmit={handleSubmit}>
-            <div className={styles.formGroup}>
-              <label>Full Name</label>
-              <input 
-                type="text" 
-                name="name" 
-                required 
-                value={formData.name} 
-                onChange={handleChange} 
-                className={styles.inputField} 
-                placeholder="John Doe" 
-              />
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label>Phone Number</label>
-              <input 
-                type="tel" 
-                name="phone" 
-                required 
-                value={formData.phone} 
-                onChange={handleChange} 
-                className={styles.inputField} 
-                placeholder="+91 00000 00000" 
-              />
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label>Email Address</label>
-              <input 
-                type="email" 
-                name="email" 
-                required 
-                value={formData.email} 
-                onChange={handleChange} 
-                className={styles.inputField} 
-                placeholder="john@example.com" 
-              />
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label>Your Message</label>
-              <textarea 
-                name="message" 
-                required 
-                value={formData.message} 
-                onChange={handleChange} 
-                className={styles.inputField} 
-                placeholder="How can we help you?" 
-              />
-            </div>
-            
-            <button type="submit" disabled={isSubmitting} className={styles.submitBtn}>
-              {isSubmitting ? 'Sending...' : 'Send Message'}
-            </button>
-          </form>
         </div>
 
       </div>
