@@ -11,6 +11,7 @@ export default function ProjectDetails(props) {
   const [project, setProject] = useState(null);
   const [realProject, setRealProject] = useState(null);
   const [milestones, setMilestones] = useState([]);
+  const [mediaItems, setMediaItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -34,6 +35,11 @@ export default function ProjectDetails(props) {
                 const msSnap = await getDocs(collection(db, 'projects', leadData.projectId, 'milestones'));
                 const msList = msSnap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
                 setMilestones(msList);
+
+                // Fetch media
+                const mediaSnap = await getDocs(collection(db, 'projects', leadData.projectId, 'media'));
+                const mediaList = mediaSnap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
+                setMediaItems(mediaList);
              }
           }
         } else {
@@ -79,9 +85,21 @@ export default function ProjectDetails(props) {
       { name: 'Construction', status: realProject?.status === 'In Progress' ? 'In Progress' : 'Pending', progress: realProject?.completion || 0 }
     ],
     milestones: milestones,
-    gallery: [],
+    gallery: mediaItems.filter(m => m.category === 'Photo' || m.category === 'Video').map(m => ({
+      id: m.id,
+      url: m.url,
+      label: m.name,
+      date: new Date(m.uploadedAt).toLocaleDateString(),
+      type: m.category
+    })),
     logs: [],
-    documents: []
+    documents: mediaItems.filter(m => m.category === 'Document').map(m => ({
+      id: m.id,
+      url: m.url,
+      name: m.name,
+      type: m.category,
+      date: new Date(m.uploadedAt).toLocaleDateString()
+    }))
   };
 
   const formatCurrency = (val) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(val);
@@ -174,9 +192,13 @@ export default function ProjectDetails(props) {
                       <p style={{ color: '#64748b', fontSize: '14px' }}>No photos uploaded yet.</p>
                     </div>
                   ) : (
-                    p.gallery.map((img, i) => (
-                      <div key={i} style={{ borderRadius: '8px', overflow: 'hidden', height: '120px', position: 'relative' }}>
-                        <img src={img.url} alt={img.label} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    p.gallery.slice(0, 3).map((img, i) => (
+                      <div key={i} style={{ borderRadius: '8px', overflow: 'hidden', height: '120px', position: 'relative', background: '#f1f5f9' }}>
+                        {img.type === 'Video' ? (
+                          <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8' }}>Video</div>
+                        ) : (
+                          <img src={img.url} alt={img.label} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        )}
                       </div>
                     ))
                   )}
@@ -270,8 +292,14 @@ export default function ProjectDetails(props) {
             ) : (
               p.gallery.map((img, i) => (
                 <div key={i} style={{ background: 'white', borderRadius: '12px', overflow: 'hidden', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
-                  <div style={{ height: '200px' }}>
-                    <img src={img.url} alt={img.label} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <div style={{ height: '200px', background: '#f8fafc' }}>
+                    {img.type === 'Video' ? (
+                      <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: '18px', fontWeight: 'bold' }}>
+                        <a href={img.url} target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: 'var(--primary-color)' }}>Watch Video</a>
+                      </div>
+                    ) : (
+                      <img src={img.url} alt={img.label} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    )}
                   </div>
                   <div style={{ padding: '16px' }}>
                     <p style={{ fontSize: '15px', fontWeight: '600', color: '#0f172a', marginBottom: '4px' }}>{img.label}</p>
@@ -346,9 +374,9 @@ export default function ProjectDetails(props) {
                     <p style={{ fontSize: '15px', fontWeight: '600', color: '#0f172a', marginBottom: '4px' }}>{doc.name}</p>
                     <p style={{ fontSize: '13px', color: '#64748b' }}>{doc.type}</p>
                   </div>
-                  <button style={{ background: 'none', border: 'none', color: 'var(--primary-color)', cursor: 'pointer' }}>
-                    Download
-                  </button>
+                  <a href={doc.url} target="_blank" rel="noreferrer" style={{ background: 'none', border: 'none', color: 'var(--primary-color)', cursor: 'pointer', textDecoration: 'none', fontWeight: '600', fontSize: '14px' }}>
+                    Download / View
+                  </a>
                 </div>
               ))
             )}
